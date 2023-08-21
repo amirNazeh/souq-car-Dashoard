@@ -1,0 +1,189 @@
+<!-- Using Two-way data binding -->
+
+<div class="select-container">
+  <h3>Add Data</h3>
+
+  <select [(ngModel)]="selectedOption">
+    <option value="cars_for_sale">Cars For Sale</option>
+    <option value="cars_for_rent">Cars For Rent</option>
+    <option value="spare_parts">Spare Parts</option>
+    <option value="maintenance_centers">Maintenance Centers</option>
+  </select>
+</div>
+
+<!-- Form for cars for sale -->
+<form *ngIf="selectedOption === 'cars_for_sale'" (ngSubmit)="addCar('cars', 'cars_for_sale')">
+  <h2>Cars For Sale</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Id</label>
+    <input type="number" class="form-control" name="id" required [(ngModel)]="carToAdd.id" (ngModelChange)="checkForIdAvailability($event, 'cars', 'cars_for_sale')" />
+    <label *ngIf="!isIdAvailable" class="text-danger">Id already exists</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="carToAdd.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" name="price" required [(ngModel)]="carToAdd.price" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Kilometers</label>
+    <input type="number" class="form-control" name="quantity" required [(ngModel)]="carToAdd.kilometersDone" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Car Body</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="carToAdd.carBody" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="material" [(ngModel)]="carToAdd.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Manufacture Date</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="carToAdd.manufactureDate" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="carToAdd.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Add</button>
+</form>
+
+<!-- Form for cars for rent -->
+<form *ngIf="selectedOption === 'cars_for_rent'" (ngSubmit)="addCar('cars', 'cars_for_rent')">
+  <h2>Cars For Rent</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Id</label>
+    <input type="number" class="form-control" name="id" required [(ngModel)]="carToAdd.id" (ngModelChange)="checkForIdAvailability($event, 'cars', 'cars_for_rent')" />
+    <label *ngIf="!isIdAvailable" class="text-danger">Id already exists</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="carToAdd.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" name="price" required [(ngModel)]="carToAdd.price" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Kilometers</label>
+    <input type="number" class="form-control" name="quantity" required [(ngModel)]="carToAdd.kilometersDone" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Car Body</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="carToAdd.carBody" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="material" [(ngModel)]="carToAdd.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Manufacture Date</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="carToAdd.manufactureDate" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="carToAdd.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Add</button>
+</form>
+
+<!-- Form for spare parts -->
+<form *ngIf="selectedOption === 'spare_parts'" (ngSubmit)="addCar('cars', 'spare_parts')">
+  <h2>Spare Parts</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Id</label>
+    <input type="number" class="form-control" name="id" required [(ngModel)]="sparePartToAdd.id" (ngModelChange)="checkForIdAvailability($event, 'cars', 'spare_parts')" />
+    <label *ngIf="!isIdAvailable" class="text-danger">Id already exists</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="sparePartToAdd.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="sparePartToAdd.description" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Product Status</label>
+    <input type="text" class="form-control" name="quantity" required [(ngModel)]="sparePartToAdd.productStatus" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Product Type</label>
+    <input type="text" class="form-control" name="quantity" required [(ngModel)]="sparePartToAdd.productType" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="material" [(ngModel)]="sparePartToAdd.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="sparePartToAdd.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Add</button>
+</form>
+
+<!-- Form for maintenance centers -->
+<form *ngIf="selectedOption === 'maintenance_centers'" (ngSubmit)="addCar('cars', 'maintenance_centers')">
+  <h2>Maintenance Centers</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Id</label>
+    <input type="number" class="form-control" name="id" required [(ngModel)]="maintenanceCenterToAdd.id" (ngModelChange)="checkForIdAvailability($event, 'cars', 'maintenance_centers')" />
+    <label *ngIf="!isIdAvailable" class="text-danger">Id already exists</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="maintenanceCenterToAdd.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="maintenanceCenterToAdd.description" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Product Status</label>
+    <input type="text" class="form-control" name="quantity" required [(ngModel)]="maintenanceCenterToAdd.carMaker" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="material" [(ngModel)]="maintenanceCenterToAdd.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="maintenanceCenterToAdd.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Add</button>
+</form>

@@ -1,0 +1,20 @@
+<nav class="side-navbar">
+  <div class="title">Dashboard</div>
+  <ul>
+    <li><a routerLink="/add-cars">Add Data</a></li>
+    <li><a routerLink="/edit-and-delete-cars">Edit & Delete Data</a></li>
+
+    <div *ngIf="!(authService.user$ | async)">
+      <li>
+        <a routerLink="/login">Sign In</a>
+      </li>
+    </div>
+    <div *ngIf="authService.user$ | async as user">
+      <li>
+        <span>Hello, {{ getUserEmail(user) }}!</span>
+        <button (click)="authService.signOut()">Sign Out</button>
+      </li>
+    </div>
+    <!-- Add more navigation links as needed -->
+  </ul>
+</nav>

@@ -1,0 +1,227 @@
+<div class="select-container">
+  <h3>Edit Data</h3>
+
+  <select [(ngModel)]="selectedOption">
+    <option value="cars_for_sale">Cars For Sale</option>
+    <option value="cars_for_rent">Cars For Rent</option>
+    <option value="spare_parts">Spare Parts</option>
+    <option value="maintenance_centers">Maintenance Centers</option>
+  </select>
+</div>
+
+<!-- Form for cars for sale -->
+<form *ngIf="selectedOption === 'cars_for_sale'">
+  <h2>Cars For Sale</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Fetch by ID & Name</label>
+    <select class="form-select" name="product_name" [(ngModel)]="selectedItemID" (ngModelChange)="fetchSelectedCar()">
+      <option *ngFor="let car of carsForSaleList" [value]="car.id">{{ car.id }} - {{ car.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">ID</label>
+    <input type="text" class="form-control" name="id" disabled required [(ngModel)]="carToEdit.id" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="carToEdit.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" name="price" required [(ngModel)]="carToEdit.price" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Kilometers</label>
+    <input type="number" class="form-control" name="kilometers_done" required [(ngModel)]="carToEdit.kilometersDone" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Car Body</label>
+    <input type="text" class="form-control" name="car_body" [(ngModel)]="carToEdit.carBody" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="sale_location" [(ngModel)]="carToEdit.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Manufacture Date</label>
+    <input type="text" class="form-control" name="manufacture_date" [(ngModel)]="carToEdit.manufactureDate" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="carToEdit.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block" (click)="editCar('cars', 'cars_for_sale')">Update</button>
+  <button type="submit" class="btn btn-danger btn-block" (click)="deleteCar('cars', 'cars_for_sale')">Delete</button>
+</form>
+
+<!-- Form for cars for rent -->
+<form *ngIf="selectedOption === 'cars_for_rent'" #myForm="ngForm">
+  <h2>Cars For Rent</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Fetch by ID & Name</label>
+    <select class="form-select" name="product_name" [(ngModel)]="selectedItemID" (ngModelChange)="fetchSelectedCar()">
+      <option *ngFor="let car of carsForRentList" [value]="car.id">{{ car.id }} - {{ car.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">ID</label>
+    <input type="text" class="form-control" name="id" disabled required [(ngModel)]="rentedCarToEdit.id" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="rentedCarToEdit.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" name="price" required [(ngModel)]="rentedCarToEdit.price" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Fuel</label>
+    <input type="text" class="form-control" name="fuel" required [(ngModel)]="rentedCarToEdit.fuel" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Car Body</label>
+    <input type="text" class="form-control" name="car_body" [(ngModel)]="rentedCarToEdit.carBody" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Car Maker</label>
+    <input type="text" class="form-control" name="car_maker" [(ngModel)]="rentedCarToEdit.carMaker" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Driver Status</label>
+    <input type="text" class="form-control" name="driver_status" [(ngModel)]="rentedCarToEdit.driverStatus" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Rental Term</label>
+    <input type="text" class="form-control" name="rentalTerm" [(ngModel)]="rentedCarToEdit.rentalTerm" />
+  </div>
+
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Transmission</label>
+    <input type="text" class="form-control" name="transmission" [(ngModel)]="rentedCarToEdit.transmission" />
+  </div>
+
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="sale_location" [(ngModel)]="rentedCarToEdit.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Manufacture Date</label>
+    <input type="text" class="form-control" name="manufacture_date" [(ngModel)]="rentedCarToEdit.manufactureDate" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="rentedCarToEdit.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block" (click)="editCar('cars', 'cars_for_rent')">Update</button>
+  <button type="submit" class="btn btn-danger btn-block" (click)="deleteCar('cars', 'cars_for_rent')">Delete</button>
+</form>
+
+<!-- Form for spare parts -->
+<form *ngIf="selectedOption === 'spare_parts'">
+  <h2>Spare Parts</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Fetch by ID & Name</label>
+    <select class="form-select" name="fetch_by_id_and_name" [(ngModel)]="selectedItemID" (ngModelChange)="fetchSelectedCar()">
+      <option *ngFor="let sparePart of sparePartsList" [value]="sparePart.id">{{ sparePart.id }} - {{ sparePart.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="sparePartToEdit.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="description" required [(ngModel)]="sparePartToEdit.description" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Product Status</label>
+    <input type="text" class="form-control" name="product_status" required [(ngModel)]="sparePartToEdit.productStatus" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Product Type</label>
+    <input type="text" class="form-control" name="product_type" required [(ngModel)]="sparePartToEdit.productType" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="sale_loaction" [(ngModel)]="sparePartToEdit.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="image_url" [(ngModel)]="sparePartToEdit.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block" (click)="editCar('cars', 'spare_parts')">Update</button>
+  <button type="submit" class="btn btn-danger btn-block" (click)="deleteCar('cars', 'spare_parts')">Delete</button>
+</form>
+
+<!-- Form for maintenance centers -->
+<form *ngIf="selectedOption === 'maintenance_centers'">
+  <h2>Maintenance Centers</h2>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Fetch by ID & Name</label>
+    <select class="form-select" name="product_name" [(ngModel)]="selectedItemID" (ngModelChange)="fetchSelectedCar()">
+      <option *ngFor="let maintenanceCenter of maintenanceCentersList" [value]="maintenanceCenter.id">{{ maintenanceCenter.id }} - {{ maintenanceCenter.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">ID</label>
+    <input type="text" class="form-control" name="id" disabled required [(ngModel)]="maintenanceCenterToEdit.id" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" required [(ngModel)]="maintenanceCenterToEdit.name" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="image_url" required [(ngModel)]="maintenanceCenterToEdit.description" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Sale Location</label>
+    <input type="text" class="form-control" name="material" [(ngModel)]="maintenanceCenterToEdit.saleLocation" />
+  </div>
+
+  <div class="form-outline mb-4">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="product_details" [(ngModel)]="maintenanceCenterToEdit.imgUrl" />
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block" (click)="editCar('cars', 'maintenance_centers')">Update</button>
+  <button type="submit" class="btn btn-danger btn-block" (click)="deleteCar('cars', 'maintenance_centers')">Delete</button>
+</form>
